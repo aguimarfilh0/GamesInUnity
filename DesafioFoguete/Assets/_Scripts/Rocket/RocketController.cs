@@ -53,6 +53,25 @@ public class RocketController : MonoBehaviour
         RocketLanding();
     }
 
+    // ENCAPSULAMENTOS
+
+    public float Fuel
+    {
+        get
+        {
+            return fuel;
+        }
+        set
+        {
+            fuel = value;
+
+            if (value <= 0)
+            {
+                fuel = 0;
+            }
+        }
+    }
+
     #region Launch
     private void RocketLaunch()
     {
@@ -165,15 +184,5 @@ public class RocketController : MonoBehaviour
                 rocketParachute.SetActive(false);
             }
         }
-    #endregion
-
-    #region UI
-    public void SubmitFillFuelSlider()
-    {
-        speedMax = Mathf.RoundToInt(fillFuelSlider.value * 100);
-
-        fuel = speedMax;
-        fuelBarUI.fillAmount = fillFuelSlider.value;
-    }
     #endregion
 }
