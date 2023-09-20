@@ -15,6 +15,15 @@ public class RocketController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] private Rigidbody _rocketRig;
+
+    [Header("Upper rocket compartment")]
+    [Range(0, 100)]
+    [SerializeField] private float rotationStrengthX;
+
+    [Range(0, 100)]
+    [SerializeField] private float rotationStrengthY;
+
+    [Space(10)]
     [SerializeField] private Rigidbody _rocketNoseRig;
 
     private bool launch;
@@ -41,8 +50,9 @@ public class RocketController : MonoBehaviour
     [Space(10)]
     [SerializeField] private GameObject rocketParachute;
     
-    private void Start()
+    private void Awake()
     {
+        // Desativar colisão do compartimento superior com outros objetos
         _rocketNoseRig.isKinematic = true;
         _rocketNoseRig.detectCollisions = false;
     }
@@ -65,99 +75,125 @@ public class RocketController : MonoBehaviour
         {
             fuel = value;
 
-            if (value <= 0)
+            if (fuel <= 0)
             {
                 fuel = 0;
             }
         }
     }
 
-    #region Launch
-    private void RocketLaunch()
+    public int SpeedMax
     {
-        // Inicia o lançamento do foguete
-        if (!launch && speedMax > 0)
+        get
         {
-            launch = true;
+            return speedMax;
         }
-
-        if (launch)
+        set
         {
-            fuel -= 0.1f;
+            speedMax = value;
 
-            // Enquanto ouver combustível
-            if (fuel > 0)
+            if (speedMax <= 0)
             {
-                speed += acceleration;
-
-                if (speed > accelerationMax)
-                {
-                    speed = accelerationMax;
-                }
-
-                fuelBarUI.fillAmount = fuel / 30;
-
-                _rocketRig.AddForce(transform.up * speed * Time.deltaTime);
+                speedMax = 0;
             }
-            else
-            {
-                speed = 0;
-                fillFuelSlider.value = 0;        
-            }
-        }
-
-        // Se ouver combustível
-        if (fuel > 0 )
-        {
-            _rocketJetSFX.SetActive(true);
-            
-            postCombustion.Play();
-            glow.Play();
-
-            _rocketRig.drag = 0;
-        }
-        else
-        {
-            launch = false;
-
-            _rocketJetSFX.SetActive(false);
-
-            postCombustion.Stop();
-            glow.Stop();    
-
-            _rocketRig.drag = 2;
-        }
-
-        // Ao chegar em uma certa altura o foguete para de decolar
-        if (_rocketRig.velocity.y >= 25 && !landing)
-        {
-            IEnumerator ActiveParachute()
-            {
-                yield return new WaitForSeconds(0.5f);
-                rocketParachute.SetActive(true);
-
-                // Inicia a fase de pouso
-                landing = true;
-            }
-
-            fillFuelUI.SetActive(false);
-            
-            fuel = 0;
-
-            // Separar o compartimento 
-            _rocketNoseRig.isKinematic = false;
-            _rocketNoseRig.detectCollisions = true;
-            _rocketNoseRig.drag = 4;
-
-            // Ativar paraquedas
-            StartCoroutine(ActiveParachute());
         }
     }
+
+    #region Launch
+        private void RocketLaunch()
+        {
+            // Inicia o lançamento do foguete
+            if (!launch && fuel > 0)
+            {
+                launch = true;
+
+                _rocketJetSFX.SetActive(true);
+                
+                postCombustion.Play();
+                glow.Play();
+
+                _rocketRig.drag = 0;
+            }
+            else if (fuel <= 0)
+            {
+                launch = false;
+
+                _rocketJetSFX.SetActive(false);
+
+                postCombustion.Stop();
+                glow.Stop();    
+
+                _rocketRig.drag = 1;
+            }
+
+            // Se o foguete foi lançado...
+            if (launch)
+            {
+                fuel -= 0.1f;
+
+                // Enquanto ouver combustível
+                if (fuel > 0)
+                {
+                    speed += acceleration;
+
+                    if (speed > accelerationMax)
+                    {
+                        speed = accelerationMax;
+                    }
+
+                    fuelBarUI.fillAmount = fuel / 100;
+
+                    _rocketRig.AddForce(transform.up * speed * Time.deltaTime);
+                }
+                else
+                {
+                    speed = 0;
+                    fillFuelSlider.value = speed;        
+                }
+            }
+
+            // Ao chegar em uma certa altura, o foguete para de decolar
+            if (_rocketRig.velocity.y >= 25 && !landing)
+            {
+                IEnumerator ActiveParachute()
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    rocketParachute.SetActive(true);
+                    
+                    // Inicia a fase de pouso
+                    landing = true;
+
+                    // Adiciona uma força ao compartimento superior para que ele se solte
+                    _rocketNoseRig.AddForce(Vector3.up * 2, ForceMode.Impulse);
+                    _rocketNoseRig.AddForce(Vector3.right * 2, ForceMode.Impulse);
+
+                    // Adiciona torque para a rotação do compartimento superior no eixo X
+                    _rocketNoseRig.AddTorque(Vector3.right * rotationStrengthX);
+
+                    // Adiciona torque para a rotação do compartimento superior no eixo Y
+                    _rocketNoseRig.AddTorque(Vector3.up * rotationStrengthY);                    
+                }
+
+                fillFuelUI.SetActive(false);
+                
+                fuel = 0;
+
+                // Ativar colisão do compartimento superior com outros objetos
+                _rocketNoseRig.isKinematic = false;
+                _rocketNoseRig.detectCollisions = true;
+
+                _rocketNoseRig.drag = 4;
+
+                // Ativar paraquedas
+                StartCoroutine(ActiveParachute());
+            }
+        }
     #endregion
 
     #region Landing
         private void RocketLanding()
         {
+            // Se a fase de pouso foi iniciada...
             if (landing)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
@@ -178,6 +214,7 @@ public class RocketController : MonoBehaviour
     #region Collision
         private void OnCollisionEnter(Collision collision)
         {
+            // Se o foguete chegar ao chão (área de pouso)
             if (collision.gameObject.CompareTag("LandingArea") && landing)
             {
                 landing = false;
