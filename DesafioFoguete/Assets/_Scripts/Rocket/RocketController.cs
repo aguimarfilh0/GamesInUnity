@@ -205,10 +205,10 @@ public class RocketController : MonoBehaviour
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
 
-                // Calcule a rotação desejada apenas no eixo Y
+                // Calcula a rotação no eixo Y
                 float desiredYRotation = transform.rotation.eulerAngles.y + horizontalInput * rotationSpeed * Time.deltaTime;
 
-                // Aplique a rotação suavemente
+                // Aplica a rotação suavemente
                 Quaternion newRotation = Quaternion.Euler(0, desiredYRotation, 0);
                 _rocketRig.MoveRotation(newRotation);
             }
