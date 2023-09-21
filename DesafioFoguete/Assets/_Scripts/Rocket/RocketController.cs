@@ -18,6 +18,13 @@ public class RocketController : MonoBehaviour
 
     [Header("Upper rocket compartment")]
     [Range(0, 100)]
+    [SerializeField] private float strengtX;
+
+    [Range(0, 100)]
+    [SerializeField] private float strengtY;
+   
+    [Space(10)]
+    [Range(0, 100)]
     [SerializeField] private float rotationStrengthX;
 
     [Range(0, 100)]
@@ -153,7 +160,7 @@ public class RocketController : MonoBehaviour
             }
 
             // Ao chegar em uma certa altura, o foguete para de decolar
-            if (_rocketRig.velocity.y >= 25 && !landing)
+            if (_rocketRig.velocity.y >= 40 && !landing)
             {
                 IEnumerator ActiveParachute()
                 {
@@ -164,8 +171,8 @@ public class RocketController : MonoBehaviour
                     landing = true;
 
                     // Adiciona uma força ao compartimento superior para que ele se solte
-                    _rocketNoseRig.AddForce(Vector3.up * 2, ForceMode.Impulse);
-                    _rocketNoseRig.AddForce(Vector3.right * 2, ForceMode.Impulse);
+                    _rocketNoseRig.AddForce(Vector3.right * strengtX, ForceMode.Impulse);
+                    _rocketNoseRig.AddForce(Vector3.up * strengtY, ForceMode.Impulse);
 
                     // Adiciona torque para a rotação do compartimento superior no eixo X
                     _rocketNoseRig.AddTorque(Vector3.right * rotationStrengthX);
@@ -198,14 +205,11 @@ public class RocketController : MonoBehaviour
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
 
-                // Crie um vetor de direção com base na entrada do jogador
-                Vector3 inputDirection = new Vector3(horizontalInput, 0, 0).normalized;
-
-                // Calcule o vetor de direção desejado com base na direção atual e na entrada do jogador
-                Vector3 desiredDirection = Vector3.RotateTowards(transform.forward, inputDirection, rotationSpeed * Time.deltaTime, 0.0f);
+                // Calcule a rotação desejada apenas no eixo Y
+                float desiredYRotation = transform.rotation.eulerAngles.y + horizontalInput * rotationSpeed * Time.deltaTime;
 
                 // Aplique a rotação suavemente
-                Quaternion newRotation = Quaternion.LookRotation(desiredDirection);
+                Quaternion newRotation = Quaternion.Euler(0, desiredYRotation, 0);
                 _rocketRig.MoveRotation(newRotation);
             }
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04400375, g: 0.044725407, b: 0.05939551, a: 1}
+  m_IndirectSpecularColor: {r: 0.04400354, g: 0.044725467, b: 0.05939564, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6096,12 +6096,14 @@ MonoBehaviour:
   speed: 0
   speedMax: 0
   acceleration: 30
-  accelerationMax: 1000
+  accelerationMax: 1500
   _rocketRig: {fileID: 1161290264}
-  rotationStrengthX: 10
-  rotationStrengthY: 5
+  strengtX: 5
+  strengtY: 5
+  rotationStrengthX: 15
+  rotationStrengthY: 10
   _rocketNoseRig: {fileID: 830401521}
-  rotationSpeed: 10
+  rotationSpeed: 200
   fillFuelSlider: {fileID: 247247312}
   fillFuelUI: {fileID: 247247310}
   fuelBarUI: {fileID: 1419309297}
@@ -6762,7 +6764,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483643661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.21, z: 0}
+  m_LocalPosition: {x: 0, y: 1.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
