@@ -12,7 +12,7 @@ Small scope 2D/3D projects made in Unity.
 
 <!--- # "Verify icons availability here https://github.com/tandpfun/skill-icons" -->
 
-[![My Skills](https://skillicons.dev/icons?i=cs,unity,github,visualstudio,vscode,stackoverflow)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=cs,dotnet,unity,github,git,visualstudio,vscode,stackoverflow)](https://skillicons.dev)
 
 ## Getting Started
 
