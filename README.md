@@ -1,30 +1,46 @@
-<!--- # "Can be a image or a gift from the project pages" -->
-
-<!-- <p align="center">
-  <img src="./GoldBank_Unity/Assets/_Sprites/Logos/Gold Bank/LogoGoldBank.png" alt="Gold Bank Logo" width="300" height="300">
-</p> -->
-
-# Games in Unity
-
+<h1 align="center" style="font-weight: bold;">Games in Unity 🎮</h1>
+<p align="left">
 Small scope 2D/3D projects made in Unity.
+</p>
 
-## Tech Stack
+
+<h2>Tech Stack</h2>
 
 <!--- # "Verify icons availability here https://github.com/tandpfun/skill-icons" -->
 
 [![My Skills](https://skillicons.dev/icons?i=cs,dotnet,unity,github,git,visualstudio,vscode,stackoverflow)](https://skillicons.dev)
 
-## Getting Started
+<br>
 
-1. Download **Unity Hub** and run it.
-2. In Unity Hub, download the **Unity version** that matches the project.
-3. After downloading Unity, **open the project in Unity Hub**.
+<details open="open">
+<summary>Table of Contents</summary>
+  
+- [🚀 Getting Started](#started)
+  - [⚙️ Prerequisites](#prerequisites)
+  - [🛠️ Run Projects in Unity](#rununity)
+- [📄 Licenses](#licenses)
+  
+</details>
 
-**Or you can watch the .mp4 demo videos.** <br>
+<h2 id="started">🚀 Getting Started</h2>
 
-**To find the current Unity version used in the project, open the project in Unity Hub and a notification about the Unity version will be displayed.**
+<h4 id="prerequisites">⚙️ Prerequisites:</h4>
 
-## License
+The following software must be installed and configured:
+- [Visual Studio](https://visualstudio.microsoft.com/pt-br/vs/community/)
+- [Unity Hub](https://unity.com/pt/download)
+
+<br>
+
+<h4 id="rununity">🛠️ Run Projects in Unity:</h4>
+
+1. Download Unity Hub and run it.
+2. In Unity Hub, download the Unity version compatible with the project.
+3. After downloading Unity, open the project in Unity Hub.
+
+Note: You can also watch the demo videos for each project, which are located in the ‘DemonstrationVideos’ folder. To find out the current version of Unity used in the project, open the project in Unity Hub and a notification about the Unity version will be displayed.
+
+<h2 id="licenses">📄 Licenses</h2>
 
 This software is available under the following licenses:
 
