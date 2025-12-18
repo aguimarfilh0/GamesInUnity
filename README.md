@@ -50,6 +50,8 @@ The following software must be installed and configured:
 
 Note: You can also watch the demo videos for each project, which are located in the ‘DemonstrationVideos’ folder. To find out the current version of Unity used in the project, open the project in Unity Hub and a notification about the Unity version will be displayed.
 
+<br>
+
 <h2 id="licenses">📄 Licenses</h2>
 
 This software is available under the following licenses:
