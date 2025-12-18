@@ -25,7 +25,10 @@ Small scope 2D/3D projects made in Unity.
 
 <h2 id="demonstration">🎥 Demonstration</h2>
 
-🎥 You can watch the demo videos for each project, located in the [DemonstrationVideos](https://github.com/aguimarfilh0/GamesInUnity/tree/main/DemonstrationVideos) folder.
+🎥 Watch gameplay videos for each project:
+- [Rocket Challenge Project](https://youtu.be/KK-9z9Y3-_E)
+- [Flappy Bird 2D Project](https://youtu.be/URCV2mQnB3s)
+- [Pong 2D Project](https://youtu.be/tm6NJBy8f34?si=oV06yO7gjzoP0DuD)
 
 <br>
 
