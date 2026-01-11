@@ -48,7 +48,7 @@ The following software must be installed and configured:
 2. In Unity Hub, download the Unity version compatible with the project.
 3. After downloading Unity, open the project in Unity Hub.
 
-Note: You can also watch the demo videos for each project, which are located in the ‘DemonstrationVideos’ folder. To find out the current version of Unity used in the project, open the project in Unity Hub and a notification about the Unity version will be displayed.
+Note: To find out the current version of Unity used in the project, open the project in Unity Hub and a notification about the Unity version will be displayed.
 
 <br>
 
